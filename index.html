@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="no-js page" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="page__body">
+
+    <!-- SITE-HEADER -->
+    <header class="site-header callout primary text-center">
+      <div class="grid-container">
+        <h1 class="site-header__heading h2">News website</h1>
+        <p>Read top headlines of different sources or find articles based on your interest</p>
+      </div>
+    </header>
+
+
+    <!-- MAIN-CONTENT -->
+    <main class="main-content">
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <section class="cell large-8">
+            <h2 class="h3">Search for news</h2>
+            <form class="search-form grid-x grid-padding-x" action="https://newsapi.org" method="GET">
+              <div class="cell large-6">
+                <label for="query-input">Query</label>
+                <input class="search-query-input" type="search" id="query-input" name="q" placeholder="Topic" required>
+                <label class="text-right">
+                  <input class="search-in-title-checkbox" type="checkbox" name="qInTitle"> Search in heading
+                </label>
+              </div>
+              <div class="cell large-3">
+                <label for="start-date-input">Start date</label>
+                <input class="search-start-date" type="date" id="start-date-input" required>
+              </div>
+              <div class="cell large-3">
+                <label for="end-date-input">End date</label>
+                <input class="search-end-date" type="date" id="end-date-input" required>
+              </div>
+              <div class="cell text-right">
+                <button class="button success" type="submit">Search</button>
+              </div>
+            </form>
+
+            <hr>
+
+            <!-- Search results -->
+            <section class="search-results">
+              <h3 class="h4">Search results</h3>
+              <div class="search-results__list">
+                <p>Use search form to find interesting articles</p>
+              </div>
+
+              <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                </ul>
+              </nav>
+            </section>
+          </section>
+
+          <section class="top-headlines cell large-4">
+            <div class="callout alert">
+              <h2 class="h4 text-center">Top news in US</h2>
+              <div class="top-headlines__list">
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- SITE-FOOTER -->
+    <footer class="site-footer callout secondary">
+      <div class="grid-container">
+        <p>Copyright &copy; 2020</p>
+        <ul class="no-bullet">
+          <li><a href="https://newsapi.org" target="_blank">Source of news - NewsAPI.org</a></li>
+          <li><a href="https://fontawesome.com" target="_blank">Icons - FontAwesome</a></li>
+        </ul>
+      </div>
+    </footer class="site-footer">
+
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
