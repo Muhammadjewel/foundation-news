@@ -25,3 +25,29 @@ var topArticleHTML = `
       <span class="top-article__date"></span>
     </div>
   </a>`;
+
+$(document).ready(function () {
+  // Load top-headlines from server
+  $.ajax('https://newsapi.org/v2/top-headlines?country=us&apiKey=94d05747d7344d7391264e6dacae98ad', {
+    method: 'GET',
+    success: function (response) {
+      // Har bir maqola uchun
+      $.each(response.articles, function (index, article) {
+        // Uning shablonidan nusxa yaratyapmiz
+        var articleMarkup = $(topArticleHTML);
+
+        // Nusxasini mos ma'lumot bilan to'ldiryapmiz
+        articleMarkup.attr('href', article.url);
+        articleMarkup.find('.top-article__heading').text(article.title);
+        articleMarkup.find('.top-article__date').text(article.publishedAt);
+
+        // Sahifaga qo'shamiz
+        $('.top-headlines__list').append(articleMarkup);
+      });
+    },
+    error: function (errorType, errorMessage, request) {
+      console.log(errorType, errorMessage);
+    }
+  });
+
+});
