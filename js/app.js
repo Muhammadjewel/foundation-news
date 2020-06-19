@@ -26,9 +26,11 @@ var topArticleHTML = `
     </div>
   </a>`;
 
+var API_KEY = '94d05747d7344d7391264e6dacae98ad';
+
 $(document).ready(function () {
   // Load top-headlines from server
-  $.ajax('https://newsapi.org/v2/top-headlines?country=us&apiKey=94d05747d7344d7391264e6dacae98ad', {
+  $.ajax('https://newsapi.org/v2/top-headlines?country=us&apiKey=' + API_KEY, {
     method: 'GET',
     success: function (response) {
       // Har bir maqola uchun
@@ -48,6 +50,38 @@ $(document).ready(function () {
     error: function (errorType, errorMessage, request) {
       console.log(errorType, errorMessage);
     }
+  });
+
+  // Search for articles on form submit
+  $('.search-form').on('submit', function (evt) {
+    evt.preventDefault();
+
+    // Prepare query parameters for AJAX
+    var requestData = {};
+    requestData.apiKey = API_KEY;
+    requestData.language = 'en';
+    requestData.from = $(this).find('.search-start-date').val();
+    requestData.to = $(this).find('.search-end-date').val();
+
+    // Search in title or in whole article
+    var searchInTitleOnly = $(this).find('.search-in-title-checkbox').is(':checked');
+    if (searchInTitleOnly) {
+      requestData.qInTitle = $(this).find('.search-query-input').val();
+    } else {
+      requestData.q = $(this).find('.search-query-input').val();
+    
+
+    // Get articles via AJAX
+    $.ajax('https://newsapi.org/v2/everything', {
+      method: 'GET',
+      data: requestData,
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (errorType, errorMessage, request) {
+        console.log(errorType, errorMessage);
+      }
+    });
   });
 
 });
