@@ -29,6 +29,29 @@ var topArticleHTML = `
 var API_KEY = '94d05747d7344d7391264e6dacae98ad';
 
 $(document).ready(function () {
+  // Show search results in browser
+  var showSearchResults = function (articles) {
+    // Clear results list section before showing results
+    $('.search-results__list').html('');
+
+    // Append each result into results list
+    $.each(articles, function (index, article) {
+      // Create element for article
+      var elArticle = $(articleHTML);
+
+      // Fill data into element
+      elArticle.find('.article__img').attr('src', article.urlToImage);
+      elArticle.find('.article__img').attr('alt', 'Poster for article:' + article.title);
+      elArticle.find('.article__link').attr('href', article.url);
+      elArticle.find('.article__link').text(article.title);
+      elArticle.find('.article__author').text(article.author);
+      elArticle.find('.article__date').text(article.publishedAt);
+
+      $('.search-results__list').append(elArticle);
+    });
+  };
+
+
   // Load top-headlines from server
   $.ajax('https://newsapi.org/v2/top-headlines?country=us&apiKey=' + API_KEY, {
     method: 'GET',
@@ -77,7 +100,7 @@ $(document).ready(function () {
       method: 'GET',
       data: requestData,
       success: function (response) {
-        console.log(response);
+        showSearchResults(response.articles);
       },
       error: function (errorType, errorMessage, request) {
         console.log(errorType, errorMessage);
