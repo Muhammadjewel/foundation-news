@@ -69,7 +69,8 @@ $(document).ready(function () {
       requestData.qInTitle = $(this).find('.search-query-input').val();
     } else {
       requestData.q = $(this).find('.search-query-input').val();
-    
+    }
+
 
     // Get articles via AJAX
     $.ajax('https://newsapi.org/v2/everything', {
